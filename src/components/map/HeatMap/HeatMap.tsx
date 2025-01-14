@@ -5,11 +5,13 @@ import {useConvertGeoDotsToCanvasDotsAfterStart, useSetMoveMapEventListener} fro
 import {useDrawCirclesOnCanvas} from './fn/drawCircles.ts'
 import {initApp} from './fn/initApp.ts'
 import './HeatMap.scss'
+import {usePopulateGeoDotsWithRandomCoords} from './fn/populateGeoDots.ts'
 
 export function HeatMap() {
 	const mapRef = useRef<null | ymaps.Map>(null)
 	const canvasRef = useRef<null | HTMLCanvasElement>(null)
 
+	usePopulateGeoDotsWithRandomCoords()
 	useConvertGeoDotsToCanvasDotsAfterStart()
 	useSetMoveMapEventListener()
 	useDrawCirclesOnCanvas(canvasRef)
