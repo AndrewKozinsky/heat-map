@@ -6,7 +6,7 @@ export function usePopulateGeoDotsWithRandomCoords() {
 	useEffect(function () {
 		// x 51.815 -> 51.807
 		// y 55.1600 -> 55.182
-	    const randomGeoDots = generateRandomDots(51.816, 55.158, -0.01, 0.025, 1000)
+	    const randomGeoDots = generateRandomDots(51.816, 55.158, -0.01, 0.025, 100)
 		useMapStore.setState({geoDots: randomGeoDots})
 	}, [])
 }

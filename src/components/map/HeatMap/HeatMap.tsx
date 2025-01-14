@@ -1,11 +1,11 @@
 import {Map, YMaps} from '@pbe/react-yandex-maps'
-import React, {useRef} from 'react'
+import React, {useEffect, useRef} from 'react'
 import {useMapStore} from '../store/mapStore.ts'
 import {useConvertGeoDotsToCanvasDotsAfterStart, useSetMoveMapEventListener} from './fn/convertGeoDotsToCanvasDots.ts'
-import {useDrawCirclesOnCanvas} from './fn/drawCircles.ts'
+import {useDrawHeatOnCanvas} from './fn/drawHeatOnCanvas.ts'
 import {initApp} from './fn/initApp.ts'
-import './HeatMap.scss'
 import {usePopulateGeoDotsWithRandomCoords} from './fn/populateGeoDots.ts'
+import './HeatMap.scss'
 
 export function HeatMap() {
 	const mapRef = useRef<null | ymaps.Map>(null)
@@ -14,7 +14,7 @@ export function HeatMap() {
 	usePopulateGeoDotsWithRandomCoords()
 	useConvertGeoDotsToCanvasDotsAfterStart()
 	useSetMoveMapEventListener()
-	useDrawCirclesOnCanvas(canvasRef)
+	useDrawHeatOnCanvas(canvasRef)
 
 	const centerLon = useMapStore(s => s.centerLongitude)
 	const centerLat = useMapStore(s => s.centerLatitude)

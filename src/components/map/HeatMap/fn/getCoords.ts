@@ -11,7 +11,7 @@ import {useEffect} from 'react'
 async function getCoords() {
 	const API_KEY = '0efcd236-2829-4df0-818c-8c7b2ffb3387'
 
-	const address = 'Оренбург,+ул.+Транспортная,+16/4';
+	const address = 'Оренбург,+ул.+Транспортная,+16';
 	const url = `https://geocode-maps.yandex.ru/1.x/?apikey=${API_KEY}&geocode=${address}&format=json`
 
 	axios.get(url).then((response) => {
