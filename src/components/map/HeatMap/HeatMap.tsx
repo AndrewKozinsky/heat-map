@@ -1,7 +1,7 @@
 import {Map, YMaps} from '@pbe/react-yandex-maps'
 import React, {useRef} from 'react'
 import {useMapStore} from '../store/mapStore.ts'
-import {useConvertGeoDotsToCanvasDots} from './fn/convertGeoDotsToCanvasDots.ts'
+import {useConvertGeoDotsToCanvasDotsAfterStart, useSetMoveMapEventListener} from './fn/convertGeoDotsToCanvasDots.ts'
 import {useDrawCirclesOnCanvas} from './fn/drawCircles.ts'
 import {initApp} from './fn/initApp.ts'
 import './HeatMap.scss'
@@ -10,7 +10,8 @@ export function HeatMap() {
 	const mapRef = useRef<null | ymaps.Map>(null)
 	const canvasRef = useRef<null | HTMLCanvasElement>(null)
 
-	useConvertGeoDotsToCanvasDots(mapRef)
+	useConvertGeoDotsToCanvasDotsAfterStart()
+	useSetMoveMapEventListener()
 	useDrawCirclesOnCanvas(canvasRef)
 
 	const centerLon = useMapStore(s => s.centerLongitude)
@@ -20,7 +21,7 @@ export function HeatMap() {
 
 	return (
 		<div className='map-container'>
-			<YMaps>
+			<YMaps query={{ apikey: '0efcd236-2829-4df0-818c-8c7b2ffb3387' }}>
 				<Map
 					defaultState={{
 						center: [centerLon, centerLat],

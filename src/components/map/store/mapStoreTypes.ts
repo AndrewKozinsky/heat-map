@@ -9,6 +9,9 @@ export type CanvasDotCoords = {
 }
 
 export interface MapStore {
+	mapInstance: null | ymaps.Map
+	projection: null | object
+
 	centerLongitude: number
 	centerLatitude: number
 

@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import {useMapStore} from '../../store/mapStore.ts'
-import {DotCoords} from '../../store/mapStoreTypes.ts'
+import {CanvasDotCoords} from '../../store/mapStoreTypes.ts'
 
 export function useDrawCirclesOnCanvas(canvasRef: React.MutableRefObject<HTMLCanvasElement>) {
 	const dotsCoords = useMapStore(s => s.canvasDotsCoords)
@@ -11,7 +11,7 @@ export function useDrawCirclesOnCanvas(canvasRef: React.MutableRefObject<HTMLCan
 	}, [canvasRef.current, dotsCoords])
 }
 
-function drawRedCirclesOnCanvas($canvas: HTMLCanvasElement, points: DotCoords[]): void {
+function drawRedCirclesOnCanvas($canvas: HTMLCanvasElement, points: CanvasDotCoords[]): void {
 	const ctx = $canvas.getContext('2d')
 
 	if (!ctx) {
@@ -19,11 +19,12 @@ function drawRedCirclesOnCanvas($canvas: HTMLCanvasElement, points: DotCoords[])
 		return
 	}
 
+	ctx.clearRect(0, 0, 5000, 3000)
 	ctx.fillStyle = 'red'
 
 	points.forEach(point => {
 		ctx.beginPath()
-		ctx.arc(point.x, point.y, 5, 0, Math.PI * 2)
+		ctx.arc(point.x - 2, point.y - 2, 4, 0, Math.PI * 2)
 		ctx.fill()
 		ctx.closePath()
 	})
