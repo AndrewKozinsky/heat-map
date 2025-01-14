@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import {useMapStore} from '../../store/mapStore.ts'
 
 export function initApp(mapInstance: null | ymaps.Map) {
 	if (!mapInstance) return
@@ -6,8 +6,9 @@ export function initApp(mapInstance: null | ymaps.Map) {
 	const projection = mapInstance.options.get("projection")
 	if (!projection) return
 
-	const longitude = 51.81061
-	const latitude = 55.171111
+	const longitude = useMapStore.getState().centerLongitude
+	const latitude = useMapStore.getState().centerLatitude
+
 	const zoom = mapInstance.getZoom()
 
 	const globalPixelCoords = projection.toGlobalPixels([longitude,latitude], zoom)

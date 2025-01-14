@@ -1,20 +1,25 @@
 import {Map, YMaps} from '@pbe/react-yandex-maps'
 import React, {useRef} from 'react'
+import {useMapStore} from '../store/mapStore.ts'
+import {useDrawCirclesOnCanvas} from './fn/drawCircles.ts'
 import {initApp} from './fn/initApp.ts'
 import './HeatMap.scss'
 
 export function HeatMap() {
 	const mapRef = useRef<null | ymaps.Map>(null)
+	const canvasRef = useRef<null | HTMLCanvasElement>(null)
 
-	const longitude = 51.81061
-	const latitude = 55.171111
+	useDrawCirclesOnCanvas(canvasRef.current)
+
+	const centerLon = useMapStore(s => s.centerLongitude)
+	const centerLat = useMapStore(s => s.centerLatitude)
 
 	return (
 		<div className='map-container'>
 			<YMaps>
 				<Map
 					defaultState={{
-						center: [longitude, latitude],
+						center: [centerLon, centerLat],
 						zoom: 15,
 					}}
 					instanceRef={(ref) => {
@@ -25,7 +30,7 @@ export function HeatMap() {
 					onLoad={() => initApp(mapRef.current)}
 				/>
 			</YMaps>
-			<canvas className='canvas' />
+			<canvas className='canvas' ref={canvasRef} />
 		</div>
 	)
 }
